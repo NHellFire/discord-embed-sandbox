@@ -8,7 +8,7 @@ $(document).ready(function () {
     useVars: false
   };
 
-  var fields = 1;
+  var fields = 0;
 
   var source = '';
 
@@ -23,7 +23,7 @@ $(document).ready(function () {
     url: '',
     thumb_url: '',
     color: '',
-    fields: [{}],
+    fields: [],
     footer: ''
   };
 
