@@ -27,6 +27,37 @@ $(document).ready(function () {
     footer: ''
   };
 
+  // Load saved settings from URL
+  var urlparams = new URLSearchParams(document.location.search);
+
+  // Options
+  if (urlparams.has("useVars")) {
+    switches.useVars = urlparams.get("useVars") == 1;
+    $('#useVars').prop("checked", true);
+  }
+
+  // Variables
+  var urlfields = ["title", "url", "description", "thumb_url", "color", "footer"];
+  for (var key in urlfields) {
+    key = urlfields[key];
+    if (urlparams.has(key)) {
+      var val = urlparams.get(key);
+      embed[key] = val;
+      $('#' + key).val(val);
+    }
+  }
+  // Author variables
+  var urlfields = ["name", "url", "icon"];
+  for (var key in fields) {
+    key = urlfields[key];
+    if (urlparams.has["author_" + key]) {
+       var val = urlparams.get("author_" + key);
+       embed["author"]["key"] = val;
+       $('#author_' + key).val(val);
+    }
+  }
+
+
   function resetEmbed() {
     $('.embed-inner').html('');
     $('.embed-footer').remove();
@@ -35,6 +66,38 @@ $(document).ready(function () {
 
   function updateEmbed(embed) {
     resetEmbed();
+
+    var exportfields = {};
+
+    // Options
+    if (switches.useVars) exportfields["useVars"] = 1;
+
+    // Variables
+    var urlfields = ["title", "url", "description", "thumb_url", "color", "footer"];
+    for (var key in urlfields) {
+        key = urlfields[key];
+        if (embed[key]) {
+            exportfields[key] = embed[key];
+        }
+    }
+    // Author variables
+    var urlfields = ["name", "url", "icon"];
+    for (var key in urlfields) {
+        key = urlfields[key];
+        if (embed["author"][key]) {
+            exportfields["author_" + key] = embed["author"][key];
+        }
+    }
+
+
+
+    // Display link
+    var exportlink = document.location.protocol + "//" + document.location.host + (location.port ? ":" + location.port : "") + document.location.pathname + "?";
+    for (var key in exportfields) {
+        exportlink = exportlink + key + "=" + encodeURI(exportfields[key]) + "&";
+    }
+    if (exportlink.substr(-1) == "&") exportlink = exportlink.substr(0, exportlink.length - 1);
+    $('.exportlink').text(exportlink);
 
     // add basic embed generation to source
     source = 'embed=discord.Embed(';
