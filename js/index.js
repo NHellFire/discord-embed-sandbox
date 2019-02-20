@@ -43,7 +43,7 @@ $(document).ready(function () {
     if (urlparams.has(key)) {
       var val = urlparams.get(key);
       embed[key] = val;
-      $('#' + key).val(val);
+      $('#' + key.replace("_url", "")).val(val);
     }
   }
   // Author variables
@@ -415,14 +415,14 @@ $(document).ready(function () {
     }
   });
 
-  $('#icon').keyup(function () {
-    var item = $('#icon');
+  $('#thumb').keyup(function () {
+    var item = $('#thumb');
     var icon = item.val();
 
     if (icon.substr(0, 4) !== 'http' && icon.length !== 0 && !switches.useVars) {
-      addWarning(item, 'icon', 'not a valid url');
+      addWarning(item, 'thumb', 'not a valid url');
     } else {
-      addSuccess(item, 'icon');
+      addSuccess(item, 'thumb');
       // update
       updateThumb(icon);
     }
