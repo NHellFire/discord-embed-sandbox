@@ -198,8 +198,7 @@ $(document).ready(function () {
       // add thumbnail
       source += 'embed.set_thumbnail(';
 
-      $('.card.embed .card-block').append('<img class="embed-thumb" src="' + embed.thumb_url + '" />');
-      $('.embed-thumb').height($('.embed-thumb')[0].naturalHeight);
+      $('.card.embed .card-block').append($("<img/>").on("load", function() { $(this).height(this.naturalHeight) }).attr("class", "embed-thumb").attr("src", embed.thumb_url));
 
       // update source
       if (switches.useVars) {
