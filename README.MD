@@ -4,7 +4,7 @@
 
 > Web-based sandbox for Discord Embeds with code generation
 
-[Click here to open](https://cog-creators.github.io/discord-embed-sandbox/)
+[Click here to open](https://nhellfire.github.io/discord-embed-sandbox/)
 
 This tool can help you get a grip on Discord Embeds (a topic some people are struggling with), it provides a simple ui to construct a message you want, as well as a realtime preview.
 
